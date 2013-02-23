@@ -6,8 +6,10 @@ import ro.enoor.rpg.level.Level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
-public class World {
+public class World {	
+	public OrthographicCamera camera;
 	private Level level;
 	private Player player;
 	

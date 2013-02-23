@@ -13,21 +13,23 @@ public abstract class Tile {
 	public static final TextureAtlas ATLAS = new TextureAtlas("atlases/tiles.atlas");
     public static final Tile[] TILES = new Tile[256];
     
-    public static final Tile VOID = new SolidTile(0, "void");
-    public static final Tile GRASS = new BasicTile(1, "grass");
-    public static final Tile DIRT = new BasicTile(2, "dirt");
-    public static final Tile SAND = new BasicTile(3, "sand");
-    public static final Tile WALL = new SolidTile(4, "wall");
+    public static final Tile VOID = new SolidTile(0, false, "void");
+    public static final Tile GRASS = new BasicTile(1, false, "grass");
+    public static final Tile DIRT = new BasicTile(2, false, "dirt");
+    public static final Tile SAND = new BasicTile(3, false, "sand");
+    public static final Tile WALL = new SolidTile(4, true, "wall");
     
     protected byte id;
     protected boolean solid;
+    protected boolean object;
     protected TextureRegion texture;
 
-    public Tile(int id, boolean solid, String name) {
+    public Tile(int id, boolean solid, boolean object, String name) {
         this.id = (byte) id;
         if (TILES[id] != null)
             throw new RuntimeException("Duplicate tile id on " + id);
         this.solid = solid;
+        this.object = object;
         TILES[id] = this;
         
         if(name == "void") texture = new TextureRegion(new Texture(TILE_SIZE, TILE_SIZE, Format.RGBA8888));
@@ -43,15 +45,15 @@ public abstract class Tile {
 		batch.draw(texture, x * TILE_SIZE, y * TILE_SIZE);
 	}
     
-    public static Tile getTileById(int id) {
+	public static Tile getTileById(int id) {
     	if(TILES[id] != null) return TILES[id];
     	return TILES[0];
     }
     
-    public static boolean isSolid(int id) {
-    	return getTileById(id).isSolid();
-    }
+    public static boolean isSolid(int id) { return getTileById(id).isSolid(); }
+    public static boolean isObject(int id) { return getTileById(id).isObject(); }
     
     public int getId() { return id; }
     public boolean isSolid() { return solid; }
+    public boolean isObject() { return object; }
 }
