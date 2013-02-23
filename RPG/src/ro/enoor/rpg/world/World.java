@@ -1,15 +1,16 @@
 package ro.enoor.rpg.world;
 
+import ro.enoor.rpg.MainGame;
 import ro.enoor.rpg.entity.Player;
 import ro.enoor.rpg.level.Level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 
-public class World {	
-	public OrthographicCamera camera;
+public class World {
+	private long startTime;
+	private boolean shouldDisplay;
 	private Level level;
 	private Player player;
 	
@@ -19,10 +20,23 @@ public class World {
 		level.initLevel();
 	}
 	
+	@SuppressWarnings("unused")
 	public void update() {
-		input();
+		if(MainGame.DEBUGGING) {
+			if(System.currentTimeMillis() > startTime + 5000) {
+				startTime = System.currentTimeMillis();
+				shouldDisplay = true;
+			} else shouldDisplay = false;
+		}
 		
+		input();
+
 		player.update();
+		level.update();
+		
+		if(MainGame.DEBUGGING && shouldDisplay) {
+			System.out.println("Update time: " + (System.currentTimeMillis() - startTime));
+		}
 	}
 	
 	public void input() {
