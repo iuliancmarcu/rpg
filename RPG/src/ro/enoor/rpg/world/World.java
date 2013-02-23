@@ -15,7 +15,7 @@ public class World {
 	private Player player;
 	
 	public World() {
-		level = new Level(this, 40, 40);
+		level = new Level(this, 100, 100);
 		player = new Player(level, 96, 96);
 		level.initLevel();
 	}

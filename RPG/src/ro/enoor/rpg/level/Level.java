@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
+import ro.enoor.rpg.entity.Enemy;
 import ro.enoor.rpg.entity.Entity;
 import ro.enoor.rpg.entity.YSortable;
 import ro.enoor.rpg.level.tile.ObjectTile;
@@ -46,6 +47,16 @@ public class Level {
 				if(Tile.isObject(map[y][x]))
 					tiles.add(new ObjectTile(Tile.getTileById(map[y][x]), x, y));
 		System.out.println(tiles.size());
+		
+		int x, y;
+		for(int i = 0; i < 10; i++) {
+			do {
+				x = random.nextInt(width);
+				y = random.nextInt(height);
+			} while(Tile.isSolid(map[y][x]));
+			
+			entities.add(new Enemy(this, x * Tile.TILE_SIZE, y * Tile.TILE_SIZE));
+		}
 	}
 
 	private void generate() {
@@ -101,8 +112,20 @@ public class Level {
 	}
 
 	private void renderBackground(SpriteBatch batch) {
-		for(int y = height - 1; y >= 0; y--)
-			for(int x = 0; x < width; x++)
+		OrthographicCamera camera = WorldRenderer.getCamera();
+
+		int startX = (int) (camera.position.x - camera.viewportWidth / 2) / Tile.TILE_SIZE;
+		int endX = (int) (camera.position.x + camera.viewportWidth / 2) / Tile.TILE_SIZE;
+		int startY = (int) (camera.position.y - camera.viewportHeight / 2) / Tile.TILE_SIZE;
+		int endY = (int) (camera.position.y + camera.viewportHeight / 2) / Tile.TILE_SIZE;
+		
+		startX = (startX >= 0) ? startX : 0;
+		endX = (endX < width) ? endX : 0;
+		startY = (startY >= 0) ? startY : 0;
+		endY = (endY < height) ? endY : 0;
+		
+		for(int y = startY; y <= endY; y++)
+			for(int x = startX; x <= endX; x++)
 				if (!Tile.isObject(map[y][x])) 
 					Tile.getTileById(map[y][x]).draw(batch, x, y);
 	}

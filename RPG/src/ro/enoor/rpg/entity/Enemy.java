@@ -1,21 +1,20 @@
 package ro.enoor.rpg.entity;
 
-import ro.enoor.rpg.level.Level;
-import ro.enoor.rpg.level.tile.Tile;
-
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player extends MoveableEntity {
-	private static final TextureAtlas ATLAS = new TextureAtlas("atlases/player.atlas");
+import ro.enoor.rpg.level.Level;
+import ro.enoor.rpg.level.tile.Tile;
 
-	public static final int WIDTH = 16;
-	public static final int HEIGHT = 32;
+public class Enemy extends MoveableEntity {
+	public static final TextureAtlas ATLAS = new TextureAtlas("atlases/enemy.atlas");
+	public static final int WIDTH = 32;
+	public static final int HEIGHT = 64;
 	public static final float SPEED = 1f;
-	
-	public Player(Level level, float x, float y) {
-		super(level, x, y, WIDTH, HEIGHT, SPEED, "player");
+
+	public Enemy(Level level, float x, float y) {
+		super(level, x, y, WIDTH, HEIGHT, SPEED, "enemy");
 		this.texture = ATLAS.findRegion("1");
 		this.hitBox = new Rectangle(position.x + 2, position.y + HEIGHT / 8, WIDTH - 4, HEIGHT / 8);
 	}
