@@ -26,7 +26,6 @@ public class WorldRenderer {
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@SuppressWarnings("unused")
@@ -38,7 +37,7 @@ public class WorldRenderer {
 			} else shouldDisplay = false;
 		}
 		
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(.5f, .5f, .5f, 1);
 		Gdx.gl.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		
 		camera.position.set(player.getPosition().x + Player.WIDTH / 2, player.getPosition().y + Player.HEIGHT / 2, 0);
@@ -46,14 +45,15 @@ public class WorldRenderer {
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		world.getLevel().render(batch);
+		world.getLevel().renderTiles(batch);
+		world.getLevel().renderEntities(batch);
 		batch.end();
 		
 		if(MainGame.DEBUGGING) {
 			shape.setProjectionMatrix(camera.combined);
 			shape.begin(ShapeType.Rectangle);
 			world.getLevel().renderTilesHitBox(shape);
-			world.getPlayer().drawHitBox(shape);
+			world.getLevel().renderEntitiesHitBox(shape);
 			shape.end();
 		}
 

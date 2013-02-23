@@ -1,8 +1,11 @@
 package ro.enoor.rpg.world;
 
+import java.util.Random;
+
 import ro.enoor.rpg.MainGame;
 import ro.enoor.rpg.entity.Player;
 import ro.enoor.rpg.level.Level;
+import ro.enoor.rpg.level.tile.Tile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -13,10 +16,19 @@ public class World {
 	private boolean shouldDisplay;
 	private Level level;
 	private Player player;
+	private Random random;
 	
 	public World() {
-		level = new Level(this, 100, 100);
-		player = new Player(level, 96, 96);
+		level = new Level(this, 10, 10);
+		
+		random = new Random();
+		int x, y;
+		do {
+			x = random.nextInt(level.getWidth());
+			y = random.nextInt(level.getHeight());
+		} while(Tile.isSolid(level.map[y][x]));
+		player = new Player(level, x * Tile.TILE_SIZE, y * Tile.TILE_SIZE);
+
 		level.initLevel();
 	}
 	
@@ -42,10 +54,12 @@ public class World {
 	public void input() {
 		Input input = Gdx.input;
 
-		if(input.isKeyPressed(Keys.S)) player.move(0);
-		if(input.isKeyPressed(Keys.A)) player.move(1);
 		if(input.isKeyPressed(Keys.W)) player.move(2);
-		if(input.isKeyPressed(Keys.D)) player.move(3);
+		else if(input.isKeyPressed(Keys.S)) player.move(0);
+		else if(input.isKeyPressed(Keys.A)) player.move(1);
+		else if(input.isKeyPressed(Keys.D)) player.move(3);
+		
+		if(input.isKeyPressed(Keys.CONTROL_RIGHT)) player.shoot();
 	}
 	
 	public Level getLevel() { return level; }
