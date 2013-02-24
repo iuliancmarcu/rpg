@@ -13,11 +13,12 @@ public class Player extends MoveableEntity {
 	public static final int WIDTH = 16;
 	public static final int HEIGHT = 32;
 	public static final float SPEED = 1f;
+	public static final int HEALTH = 14;
 	
 	private long shootIntervalMS = 200, lastShoot;
 	
 	public Player(Level level, float x, float y) {
-		super(level, x, y, WIDTH, HEIGHT, SPEED, "player");
+		super(level, x, y, WIDTH, HEIGHT, SPEED, HEALTH, "player");
 		this.texture = ATLAS.findRegion("1" + facing);
 		this.hitBox = new Rectangle(position.x + 2, position.y + HEIGHT / 8, WIDTH - 4, HEIGHT / 8);
 	}
@@ -39,7 +40,6 @@ public class Player extends MoveableEntity {
 		return super.isColliding();
 	}
 	
-	@Override
 	public void draw(SpriteBatch batch) {
 		Vector2 shadowPosition = new Vector2(position.x, position.y - 26);
 		batch.draw(ATLAS.findRegion("shadow"), shadowPosition.x, shadowPosition.y);

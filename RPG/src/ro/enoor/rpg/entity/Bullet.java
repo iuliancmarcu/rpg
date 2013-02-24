@@ -14,11 +14,12 @@ public class Bullet extends MoveableEntity {
 	public static final float SPEED = 3f;
 	public static final int WIDTH = 8;
 	public static final int HEIGHT = 8;
+	public static final int DAMAGE = 2;
 	
 	private Entity owner;
 	
 	public Bullet(Level level, MoveableEntity owner) {
-		super(level, owner.position.x + owner.width / 2 - WIDTH / 2, owner.position.y + owner.height / 4 - HEIGHT / 2, WIDTH, HEIGHT, SPEED, "bullet");
+		super(level, owner.position.x + owner.width / 2 - WIDTH / 2, owner.position.y + owner.height / 4 - HEIGHT / 2, WIDTH, HEIGHT, SPEED, 0,"bullet");
 		this.owner = owner;
 		facing = owner.getFacing();
 		texture = new TextureRegion(TEXTURE);
@@ -34,7 +35,7 @@ public class Bullet extends MoveableEntity {
 		for(Entity ent : level.getVisibleEntities())
 			if(!ent.equals(owner) && (ent.getType().equals("player") || ent.getType().equals("enemy")) && hitBox.overlaps(ent.hitBox)) {
 				setRemoved();
-				ent.setRemoved();
+				((MoveableEntity) ent).hurt(DAMAGE);
 			}
 		if(isColliding() || !isOnScreen()) setRemoved();
 	}
