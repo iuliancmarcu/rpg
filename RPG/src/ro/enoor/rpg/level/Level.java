@@ -47,7 +47,7 @@ public class Level {
 		for(int y = height - 1; y >= 0; y--)
 			for(int x = 0; x < width; x++)
 				if(Tile.isObject(map[y][x]))
-					entities.add(new ObjectTile(this, Tile.getTileById(map[y][x]), x, y));
+					entities.add(new ObjectTile(this, x, y, Tile.getTileById(map[y][x])));
 		
 		int x, y;
 		for(int i = 0; i < 10; i++) {

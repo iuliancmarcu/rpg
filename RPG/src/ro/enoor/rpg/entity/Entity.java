@@ -20,13 +20,14 @@ public abstract class Entity {
 	protected int width, height;
 	private String type;
 
-	public Entity(Level level, float x, float y, int width, int height, String type) {
+	public Entity(Level level, float x, float y, String type) {
 		this.level = level;
-		this.width = width;
-		this.height = height;
-		position = new Vector2(x, y);
-		hitBox = new Rectangle(x, y, width, height);
 		this.type = type;
+		position = new Vector2(x, y);
+		hitBox = new Rectangle();
+		
+		updateTexture();
+		updateHitBox();
 	}
 	
 	public boolean isOnScreen() {
@@ -40,8 +41,6 @@ public abstract class Entity {
 		return false;
 	}
 	
-	public abstract void update();
-	
 	public void draw(SpriteBatch batch) {
 		batch.draw(texture, position.x, position.y);
 	}
@@ -49,13 +48,16 @@ public abstract class Entity {
 	public void drawHitBox(ShapeRenderer shapeRenderer) {
 		shapeRenderer.rect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
 	}
+	
+	public abstract void update();
+	protected abstract void updateTexture();
+	protected abstract void updateHitBox();
 
 	public void setLevel(Level level) { this.level = level; }
 	public boolean isRemoved() { return removed; }
 	public void setRemoved() { removed = true; }
 	public Rectangle getHitBox() { return hitBox; }
 	public Vector2 getPosition() { return position; }
-	public TextureRegion getTexture() { return texture; }
 	public String getType() { return type; }
 	public int getWidth() { return width; }
 	public int getHeight() { return height; }

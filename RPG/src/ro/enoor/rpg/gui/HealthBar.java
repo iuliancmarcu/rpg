@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class HealthBar extends GuiElement {
 	private HPUnit unit;
 	private MoveableEntity entity;
+	private int health, totalHealth;
 	
-	public HealthBar(MoveableEntity entity) {
+	public HealthBar(MoveableEntity entity, int health) {
 		super(entity.getPosition().x, entity.getPosition().y + entity.getHeight(), "healthbar");
 		this.entity = entity;
+		this.health = totalHealth = health;
 		unit = new HPUnit(this);
 	}
 
@@ -25,6 +27,14 @@ public class HealthBar extends GuiElement {
 		batch.draw(texture, position.x, position.y);
 	}
 	
+	public void addHealth(int healValue) { 
+		health += healValue;
+		health = (health > totalHealth) ? totalHealth : health;
+	}
+	public void subHealth(int damage) { health -= damage; }
+	public int getHealth() { return health; }
+	public int getTotalHealth() { return totalHealth; }
+	
 	private class HPUnit extends GuiElement {
 		private HealthBar bar;
 		
@@ -37,13 +47,9 @@ public class HealthBar extends GuiElement {
 			position.x = bar.position.x + 1;
 			position.y = bar.position.y + 1;
 		}
-		
-		public int getScaleFactor() {
-			return (bar.entity.getHealth() * 7) / bar.entity.getTotalHealth();
-		}
 
 		public void draw(SpriteBatch batch) {
-			batch.draw(texture, position.x, position.y, 0, 0, 2, 2, getScaleFactor(), 1, 0);
+			batch.draw(texture, position.x, position.y, 0, 0, 2, 2, (bar.health * 7) / bar.totalHealth, 1, 0);
 		}
 	}
 }

@@ -1,30 +1,20 @@
 package ro.enoor.rpg.entity;
 
-import ro.enoor.rpg.gui.HealthBar;
 import ro.enoor.rpg.level.Level;
 import ro.enoor.rpg.level.tile.Tile;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class MoveableEntity extends Entity {
 	protected Vector2 velocity;
 	protected float speed;
 	protected int facing;
-	protected int totalHealth, health;
-	protected boolean hasHealth;
-	protected HealthBar healthBar;
 
-	public MoveableEntity(Level level, float x, float y, int width, int height, float speed, int health, String type) {
-		super(level, x, y, width, height, type);
+	public MoveableEntity(Level level, float x, float y, float speed, String type) {
+		super(level, x, y, type);
 		velocity = new Vector2();
 		facing = 0;
 		this.speed = speed;
-		if(health > 0) {
-			hasHealth = true;
-			this.health = totalHealth = health;
-			healthBar = new HealthBar(this);
-		} else hasHealth = false;
 	}
 	
 	public void move(int dir) {
@@ -45,12 +35,9 @@ public abstract class MoveableEntity extends Entity {
 		facing = dir;
 	}
 	
-	protected abstract void upadateHitBox();
-	protected abstract void updateTexture();
-	
 	public void update() {
 		position.add(velocity);
-		upadateHitBox();
+		updateHitBox();
 		while(isColliding()) {
 			position.sub(velocity);
 			if(velocity.x > 0) velocity.x -= .1f;
@@ -58,23 +45,11 @@ public abstract class MoveableEntity extends Entity {
 			if(velocity.y > 0) velocity.y -= .01f;
 			else velocity.y += .01f;
 			position.add(velocity);
-			upadateHitBox();
+			updateHitBox();
 		}
 		velocity.set(Vector2.Zero);
-		updateTexture();
 		
-		if(hasHealth) healthBar.update();
-	}
-	
-	public void draw(SpriteBatch batch) {
-		if(hasHealth) healthBar.draw(batch);
-		super.draw(batch);
-	}
-	
-	public void hurt(int damage) {
-		health -= damage;
-		if(health <= 0)
-			setRemoved();
+		updateTexture();
 	}
 	
 	public boolean isColliding() {
@@ -105,6 +80,4 @@ public abstract class MoveableEntity extends Entity {
 	public Vector2 getVelocity() { return velocity; }
 	public float getSpeed() { return speed; }
 	public int getFacing() { return facing; }
-	public int getHealth() { return health; }
-	public int getTotalHealth() { return totalHealth; }
 }

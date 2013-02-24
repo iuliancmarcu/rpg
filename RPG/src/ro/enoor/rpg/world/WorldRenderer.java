@@ -33,11 +33,13 @@ public class WorldRenderer {
 		float cameraX, cameraY;
 		
 		if(player.getPosition().x - camera.viewportWidth / 2 < 0) cameraX = camera.viewportWidth / 2;
-		else if(player.getPosition().x + camera.viewportWidth / 2 > world.getLevel().getWidth() * Tile.TILE_SIZE) cameraX = world.getLevel().getWidth() * Tile.TILE_SIZE - camera.viewportWidth / 2;
+		else if(player.getPosition().x + camera.viewportWidth / 2 > world.getLevel().getWidth() * Tile.TILE_SIZE) 
+			cameraX = world.getLevel().getWidth() * Tile.TILE_SIZE - camera.viewportWidth / 2;
 		else cameraX = player.getPosition().x;
 		
-		if(player.getPosition().y - camera.viewportHeight / 2 < 0) cameraY = camera.viewportHeight / 2;
-		else if(player.getPosition().y + camera.viewportHeight / 2 > world.getLevel().getHeight() * Tile.TILE_SIZE) cameraY = world.getLevel().getHeight() * Tile.TILE_SIZE - camera.viewportHeight / 2;
+		if(player.getPosition().y - camera.viewportHeight / 2 < 8) cameraY = camera.viewportHeight / 2 + 8;
+		else if(player.getPosition().y + camera.viewportHeight / 2 > world.getLevel().getHeight() * Tile.TILE_SIZE + 8) 
+			cameraY = world.getLevel().getHeight() * Tile.TILE_SIZE - camera.viewportHeight / 2 + 8;
 		else cameraY = player.getPosition().y;
 		
 		camera.position.set(cameraX, cameraY, 0);
@@ -79,7 +81,7 @@ public class WorldRenderer {
 
 	public void updateCameraSize(int width, int height) {
 		camera.setToOrtho(false, width / 2, height / 2);
-		camera.update(true);
+		camera.update();
 	}
 	
 	public static OrthographicCamera getCamera() { return camera; }
