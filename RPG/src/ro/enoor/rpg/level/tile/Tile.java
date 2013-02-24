@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 public abstract class Tile {
 	public static final int TILE_SIZE = 16;
 	public static final TextureAtlas ATLAS = new TextureAtlas("atlases/tiles.atlas");
+	private static final TextureAtlas SHADOWS = new TextureAtlas("atlases/shadows.atlas");
     public static final Tile[] TILES = new Tile[256];
     
     public static final Tile VOID = new SolidTile(0, false, "void");
@@ -43,6 +44,10 @@ public abstract class Tile {
 	
 	public void draw(SpriteBatch batch, int x, int y) {
 		batch.draw(texture, x * TILE_SIZE, y * TILE_SIZE);
+	}
+	
+	public static void drawShadow(SpriteBatch batch, int x, int y, int dir) {
+		batch.draw(SHADOWS.findRegion("" + dir), x * TILE_SIZE, y * TILE_SIZE);
 	}
     
 	public static Tile getTileById(int id) {

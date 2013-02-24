@@ -19,7 +19,7 @@ public class World {
 	private Random random;
 	
 	public World() {
-		level = new Level(this, 10, 10);
+		level = new Level(this, 50, 50);
 		
 		random = new Random();
 		int x, y;
@@ -60,6 +60,11 @@ public class World {
 		else if(input.isKeyPressed(Keys.D)) player.move(3);
 		
 		if(input.isKeyPressed(Keys.CONTROL_RIGHT)) player.shoot();
+				
+		/*if(input.isKeyPressed(Keys.PERIOD)) WorldRenderer.getCamera().zoom-=.1f;
+		else if(input.isKeyPressed(Keys.COMMA)) WorldRenderer.getCamera().zoom+=.1f;
+		
+		if(input.isKeyPressed(Keys.SLASH)) WorldRenderer.getCamera().zoom = 1.0f;*/
 	}
 	
 	public Level getLevel() { return level; }

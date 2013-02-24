@@ -25,6 +25,9 @@ public class Level {
 	private Random random;
 
 	public Level(World world, int width, int height) {
+		if(width < 25) width = 25;
+		if(height < 20) height = 20;
+		
 		this.world = world;
 		this.width = width + 2;
 		this.height = height + 2;
@@ -117,8 +120,14 @@ public class Level {
 		
 		for(int y = startY; y <= endY; y++)
 			for(int x = startX; x <= endX; x++)
-				if (!Tile.isObject(map[y][x])) 
+				if (!Tile.isObject(map[y][x])) {
 					Tile.getTileById(map[y][x]).draw(batch, x, y);
+					//DRAW OBJECTS SHADOWS
+					if(x > 0 && y < height - 1) {
+						int dir = (Tile.isObject(map[y][x - 1]) ? 1 : 0) | (Tile.isObject(map[y + 1][x - 1]) ? 1 : 0) << 1 | (Tile.isObject(map[y + 1][x]) ? 1 : 0) << 2;
+						if(dir != 0) Tile.drawShadow(batch, x, y, dir);				
+					}
+				}
 	}
 
 	public void renderTilesHitBox(ShapeRenderer shapeRenderer) {

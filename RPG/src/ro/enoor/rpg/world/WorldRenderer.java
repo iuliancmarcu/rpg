@@ -2,6 +2,7 @@ package ro.enoor.rpg.world;
 
 import ro.enoor.rpg.MainGame;
 import ro.enoor.rpg.entity.Player;
+import ro.enoor.rpg.level.tile.Tile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL11;
@@ -27,6 +28,21 @@ public class WorldRenderer {
 		shape = new ShapeRenderer();
 		camera = new OrthographicCamera();
 	}
+	
+	private void setCameraPosition() {
+		float cameraX, cameraY;
+		
+		if(player.getPosition().x - camera.viewportWidth / 2 < 0) cameraX = camera.viewportWidth / 2;
+		else if(player.getPosition().x + camera.viewportWidth / 2 > world.getLevel().getWidth() * Tile.TILE_SIZE) cameraX = world.getLevel().getWidth() * Tile.TILE_SIZE - camera.viewportWidth / 2;
+		else cameraX = player.getPosition().x;
+		
+		if(player.getPosition().y - camera.viewportHeight / 2 < 0) cameraY = camera.viewportHeight / 2;
+		else if(player.getPosition().y + camera.viewportHeight / 2 > world.getLevel().getHeight() * Tile.TILE_SIZE) cameraY = world.getLevel().getHeight() * Tile.TILE_SIZE - camera.viewportHeight / 2;
+		else cameraY = player.getPosition().y;
+		
+		camera.position.set(cameraX, cameraY, 0);
+		camera.update();
+	}
 
 	@SuppressWarnings("unused")
 	public void render() {
@@ -40,8 +56,7 @@ public class WorldRenderer {
 		Gdx.gl.glClearColor(.5f, .5f, .5f, 1);
 		Gdx.gl.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		
-		camera.position.set(player.getPosition().x + Player.WIDTH / 2, player.getPosition().y + Player.HEIGHT / 2, 0);
-		camera.update();
+		setCameraPosition();
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();

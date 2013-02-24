@@ -2,8 +2,10 @@ package ro.enoor.rpg.entity;
 
 import ro.enoor.rpg.level.Level;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 public class Player extends MoveableEntity {
 	private static final TextureAtlas ATLAS = new TextureAtlas("atlases/player.atlas");
@@ -35,6 +37,13 @@ public class Player extends MoveableEntity {
 					return true;
 		}
 		return super.isColliding();
+	}
+	
+	@Override
+	public void draw(SpriteBatch batch) {
+		Vector2 shadowPosition = new Vector2(position.x, position.y - 26);
+		batch.draw(ATLAS.findRegion("shadow"), shadowPosition.x, shadowPosition.y);
+		super.draw(batch);
 	}
 	
 	public void shoot() {
