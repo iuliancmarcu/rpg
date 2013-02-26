@@ -48,7 +48,7 @@ public class Level {
 		
 		int x, y;
 		Random rand = new Random();
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 50; i++) {
 			do {
 				x = rand.nextInt(width);
 				y = rand.nextInt(height);
@@ -90,17 +90,17 @@ public class Level {
 	public void renderTiles(SpriteBatch batch) {
 		OrthographicCamera camera = WorldRenderer.getCamera();
 
-		int startX = (int) (camera.position.x - camera.viewportWidth / 2) / Tile.TILE_SIZE;
-		int endX = (int) (camera.position.x + camera.viewportWidth / 2) / Tile.TILE_SIZE;
-		int startY = (int) (camera.position.y - camera.viewportHeight / 2) / Tile.TILE_SIZE;
-		int endY = (int) (camera.position.y + camera.viewportHeight / 2) / Tile.TILE_SIZE;
+		int startX = (int) (Math.floor(camera.position.x - camera.viewportWidth / 2) / Tile.TILE_SIZE);
+		int endX = (int) (Math.floor(camera.position.x + camera.viewportWidth / 2) / Tile.TILE_SIZE);
+		int startY = (int) (Math.floor(camera.position.y - camera.viewportHeight / 2) / Tile.TILE_SIZE);
+		int endY = (int) (Math.floor(camera.position.y + camera.viewportHeight / 2) / Tile.TILE_SIZE);
 		
 		startX = (startX >= 0) ? startX : 0;
 		endX = (endX < width) ? endX : width - 1;
 		startY = (startY >= 0) ? startY : 0;
 		endY = (endY < height) ? endY : height - 1;
 		
-		for(int y = startY; y <= endY; y++)
+		for(int y = endY; y >= startY; y--)
 			for(int x = startX; x <= endX; x++)
 				if (!Tile.isObject(map[y][x])) {
 					Tile.getTileById(map[y][x]).draw(batch, x, y);

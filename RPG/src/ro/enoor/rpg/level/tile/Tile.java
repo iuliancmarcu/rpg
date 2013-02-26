@@ -31,7 +31,7 @@ public abstract class Tile {
         this.object = object;
         TILES[id] = this;
         
-        if(name == "void") texture = new TextureRegion(new Texture(TILE_SIZE, TILE_SIZE, Format.RGBA8888));
+        if(name == "void") texture = new TextureRegion(new Texture((int) TILE_SIZE, (int) TILE_SIZE, Format.RGBA8888));
         else texture = ATLAS.findRegion(name);
     }
     
@@ -39,7 +39,7 @@ public abstract class Tile {
     	batch.draw(SHADOWS.findRegion("" + dir), x * TILE_SIZE, y * TILE_SIZE);
     }
 	
-	public void draw(SpriteBatch batch, int x, int y) {
+	public void draw(SpriteBatch batch, float x, float y) {
 		batch.draw(texture, x * TILE_SIZE, y * TILE_SIZE);
 	}
     

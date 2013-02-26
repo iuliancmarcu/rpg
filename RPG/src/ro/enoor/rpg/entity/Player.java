@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends Mob {
 	private static final TextureAtlas ATLAS = new TextureAtlas("atlases/player.atlas");
 
-	public static final float N_SPEED = 1f, R_SPEED = 2f;
+	public static final float N_SPEED = .5f, R_SPEED = 1f;
 	public static final int HEALTH = 14;
 	public static final int ATT_SPEED = 200;
 	

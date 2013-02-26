@@ -1,5 +1,6 @@
 package ro.enoor.rpg.world;
 
+import ro.enoor.rpg.MainGame;
 import ro.enoor.rpg.entity.Player;
 import ro.enoor.rpg.level.tile.Tile;
 
@@ -7,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 
 public class WorldRenderer {
 	private World world;
@@ -23,25 +25,29 @@ public class WorldRenderer {
 	}
 		
 	private void updateCameraPosition() {
-		float cameraX, cameraY;
+		float targetX, targetY;
 		
-		if(player.getPosition().x - camera.viewportWidth / 2 < 0) cameraX = camera.viewportWidth / 2;
+		if(player.getPosition().x - camera.viewportWidth / 2 < 0) targetX = camera.viewportWidth / 2;
 		else if(player.getPosition().x + camera.viewportWidth / 2 > world.getLevel().getWidth() * Tile.TILE_SIZE) 
-			cameraX = world.getLevel().getWidth() * Tile.TILE_SIZE - camera.viewportWidth / 2;
-		else cameraX = player.getPosition().x;
+			targetX = world.getLevel().getWidth() * Tile.TILE_SIZE - camera.viewportWidth / 2;
+		else targetX = player.getPosition().x;
 		
-		if(player.getPosition().y - camera.viewportHeight / 2 < 8) cameraY = camera.viewportHeight / 2 + 8;
+		if(player.getPosition().y - camera.viewportHeight / 2 < 8) targetY = camera.viewportHeight / 2 + 8;
 		else if(player.getPosition().y + camera.viewportHeight / 2 > world.getLevel().getHeight() * Tile.TILE_SIZE + 8) 
-			cameraY = world.getLevel().getHeight() * Tile.TILE_SIZE - camera.viewportHeight / 2 + 8;
-		else cameraY = player.getPosition().y;
+			targetY = world.getLevel().getHeight() * Tile.TILE_SIZE - camera.viewportHeight / 2 + 8;
+		else targetY = player.getPosition().y;
 		
-		camera.position.set(cameraX, cameraY, 0);
+		float dx = targetX - camera.position.x, dy = targetY - camera.position.y, dist = (float) Math.hypot(dx, dy);
+		Vector3 cameraVector = new Vector3((float) Math.cos(Math.atan2(dy, dx)), (float) Math.sin(Math.atan2(dy, dx)), 0);
+		cameraVector.mul(dist / 50f);
+		
+		camera.position.add(cameraVector);
 		camera.update();
 	}
 
 	public void render() {
 		Gdx.gl.glClearColor(.5f, .5f, .5f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		updateCameraPosition();
 
@@ -50,6 +56,8 @@ public class WorldRenderer {
 			world.getLevel().renderTiles(batch);
 			world.getLevel().renderEntities(batch);
 		batch.end();
+		
+		MainGame.fpslogger.log();
 	}
 
 	public void updateCameraSize(int width, int height) {

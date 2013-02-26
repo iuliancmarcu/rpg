@@ -60,7 +60,7 @@ public abstract class MoveableEntity extends Entity {
 			
 			tileY = (int) (hitBox.y / Tile.TILE_SIZE);
 			if (Tile.isSolid(level.map[tileY][tileX])) return true;
-			tileY = (int) (hitBox.y + hitBox.height) / Tile.TILE_SIZE;
+			tileY = (int) ((hitBox.y + hitBox.height) / Tile.TILE_SIZE);
 			if (Tile.isSolid(level.map[tileY][tileX])) return true;
 		}
 		for(int i = 0; i < (int) hitBox.height; i++) {
@@ -68,7 +68,7 @@ public abstract class MoveableEntity extends Entity {
 			
 			tileX = (int) (hitBox.x / Tile.TILE_SIZE);
 			if (Tile.isSolid(level.map[tileY][tileX])) return true;
-			tileX = (int) (hitBox.x + hitBox.width) / Tile.TILE_SIZE;
+			tileX = (int) ((hitBox.x + hitBox.width) / Tile.TILE_SIZE);
 			if (Tile.isSolid(level.map[tileY][tileX])) return true;
 		}
 		

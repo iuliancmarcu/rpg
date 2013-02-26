@@ -17,7 +17,7 @@ public class ObjectTile extends Entity {
 	
 	protected void updateTexture() {
 		texture = Tile.ATLAS.findRegion("wall");
-		width = height = Tile.TILE_SIZE;
+		width = height = (int) Tile.TILE_SIZE;
 	}
 
 	protected void updateHitBox() {

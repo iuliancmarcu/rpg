@@ -30,9 +30,7 @@ public class World {
 		level.initLevel();
 	}
 	
-	public void update() {
-		float delta = Gdx.graphics.getDeltaTime() / 0.016f;
-		
+	public void update(float delta) {		
 		input();
 
 		player.update(delta);
@@ -48,7 +46,7 @@ public class World {
 		else if(input.isKeyPressed(Keys.D)) player.move(3);
 		
 		if(input.isKeyPressed(Keys.CONTROL_RIGHT)) player.attack();
-		if(input.isKeyPressed(Keys.SHIFT_RIGHT)) player.setSpeed(Player.R_SPEED);
+		if(input.isKeyPressed(Keys.SHIFT_RIGHT)) player.setSpeed(.001f);
 		else player.setSpeed(Player.N_SPEED);
 	}
 	
