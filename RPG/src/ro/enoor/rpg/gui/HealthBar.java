@@ -49,7 +49,7 @@ public class HealthBar extends GuiElement {
 		}
 
 		public void draw(SpriteBatch batch) {
-			batch.draw(texture, position.x, position.y, 0, 0, 2, 2, (bar.health * 7) / bar.totalHealth, 1, 0);
+			batch.draw(texture, position.x, position.y, 0, 0, 1, 2, (bar.health * 14) / bar.totalHealth, 1, 0);
 		}
 	}
 }

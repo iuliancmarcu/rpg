@@ -7,7 +7,6 @@ import ro.enoor.rpg.world.WorldRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -45,20 +44,16 @@ public abstract class Entity {
 		batch.draw(texture, position.x, position.y);
 	}
 	
-	public void drawHitBox(ShapeRenderer shapeRenderer) {
-		shapeRenderer.rect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
-	}
-	
-	public abstract void update();
+	public abstract void update(float delta);
 	protected abstract void updateTexture();
 	protected abstract void updateHitBox();
 
 	public void setLevel(Level level) { this.level = level; }
+	public Vector2 getPosition() { return position; }
+	public Rectangle getHitBox() { return hitBox; }
 	public boolean isRemoved() { return removed; }
 	public void setRemoved() { removed = true; }
-	public Rectangle getHitBox() { return hitBox; }
-	public Vector2 getPosition() { return position; }
-	public String getType() { return type; }
 	public int getWidth() { return width; }
 	public int getHeight() { return height; }
+	public String getType() { return type; }
 }

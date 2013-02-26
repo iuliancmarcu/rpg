@@ -9,13 +9,12 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends Mob {
 	private static final TextureAtlas ATLAS = new TextureAtlas("atlases/player.atlas");
 
-	public static final float SPEED = 1f;
+	public static final float N_SPEED = 1f, R_SPEED = 2f;
 	public static final int HEALTH = 14;
-	
-	private long shootIntervalMS = 200, lastShoot;
+	public static final int ATT_SPEED = 200;
 	
 	public Player(Level level, float x, float y) {
-		super(level, x, y, SPEED, HEALTH, "player");
+		super(level, x, y, N_SPEED, ATT_SPEED, HEALTH, "player");
 	}
 	
 	protected void updateTexture() {
@@ -28,12 +27,8 @@ public class Player extends Mob {
 		hitBox.set(position.x + 2, position.y + height / 8, width - 4, height / 8 + 2);		
 	}
 	
-	public void shoot() {
-		long currentTime = System.currentTimeMillis();
-		if(currentTime - lastShoot > shootIntervalMS) {
-			level.getEntities().add(new Bullet(level, this));
-			lastShoot = currentTime;
-		}
+	public void mobAttack() {
+		level.getEntities().add(new Bullet(level, this));
 	}
 	
 	public boolean isColliding() {
@@ -50,4 +45,6 @@ public class Player extends Mob {
 		batch.draw(ATLAS.findRegion("shadow"), shadowPosition.x, shadowPosition.y);
 		super.draw(batch);
 	}
+	
+	public void setSpeed(float speed) { this.speed = speed; }
 }

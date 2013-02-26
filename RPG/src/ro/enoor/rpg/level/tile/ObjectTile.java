@@ -24,7 +24,7 @@ public class ObjectTile extends Entity {
 		hitBox.set(position.x, position.y, width, height);
 	}
 	
-	public void update() { }
+	public void update(float delta) { }
 
 	public boolean isSolid() { return solid; }
 }

@@ -10,11 +10,11 @@ public abstract class MoveableEntity extends Entity {
 	protected float speed;
 	protected int facing;
 
-	public MoveableEntity(Level level, float x, float y, float speed, String type) {
+	public MoveableEntity(Level level, float x, float y, float normalSpeed, String type) {
 		super(level, x, y, type);
 		velocity = new Vector2();
 		facing = 0;
-		this.speed = speed;
+		speed = normalSpeed;
 	}
 	
 	public void move(int dir) {
@@ -35,12 +35,12 @@ public abstract class MoveableEntity extends Entity {
 		facing = dir;
 	}
 	
-	public void update() {
-		position.add(velocity);
+	public void update(float delta) {
+		position.add(velocity.mul(delta));
 		updateHitBox();
 		while(isColliding()) {
 			position.sub(velocity);
-			if(velocity.x > 0) velocity.x -= .1f;
+			if(velocity.x > 0) velocity.x -= .01f;
 			else velocity.x += .01f;
 			if(velocity.y > 0) velocity.y -= .01f;
 			else velocity.y += .01f;
@@ -60,8 +60,7 @@ public abstract class MoveableEntity extends Entity {
 			
 			tileY = (int) (hitBox.y / Tile.TILE_SIZE);
 			if (Tile.isSolid(level.map[tileY][tileX])) return true;
-			
-			tileY = (int) ((hitBox.y + hitBox.height) / Tile.TILE_SIZE);
+			tileY = (int) (hitBox.y + hitBox.height) / Tile.TILE_SIZE;
 			if (Tile.isSolid(level.map[tileY][tileX])) return true;
 		}
 		for(int i = 0; i < (int) hitBox.height; i++) {
@@ -69,8 +68,7 @@ public abstract class MoveableEntity extends Entity {
 			
 			tileX = (int) (hitBox.x / Tile.TILE_SIZE);
 			if (Tile.isSolid(level.map[tileY][tileX])) return true;
-			
-			tileX = (int) ((hitBox.x + hitBox.width) / Tile.TILE_SIZE);
+			tileX = (int) (hitBox.x + hitBox.width) / Tile.TILE_SIZE;
 			if (Tile.isSolid(level.map[tileY][tileX])) return true;
 		}
 		

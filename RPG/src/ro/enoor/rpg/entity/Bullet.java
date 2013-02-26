@@ -32,7 +32,7 @@ public class Bullet extends MoveableEntity {
 		hitBox = new Rectangle(position.x + width / 4, position.y + width / 4, width / 2, width / 2);
 	}
 	
-	public void update() {
+	public void update(float delta) {
 		move(facing);
 		
 		position.add(velocity);
