@@ -1,0 +1,129 @@
+commit 2708b6170c9fa7b21b3c31ad18dddc721216cdc1
+Merge: d19da3c b788750
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Tue Feb 26 16:49:13 2013 +0200
+
+    Merge branch 'master' of https://github.com/marcuiulian13/rpg
+
+commit d19da3c1f50ed101ee53c9b48c8ac345f066fa53
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Tue Feb 26 16:47:43 2013 +0200
+
+    Update
+
+commit b7887505313c8f391909d70c20f28753022d7e03
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Tue Feb 26 15:55:05 2013 +0200
+
+    Before adding lights.
+
+commit 4d6bbd560f8d29607d6525f5a71f933a94d0f194
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Mon Feb 25 01:33:47 2013 +0200
+
+    Entity class tree refactored
+
+commit 437db8bce80b5477b6b32e0e06fb788fb52c322e
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sun Feb 24 21:40:56 2013 +0200
+
+    Added healthbars and damage.
+
+commit f1d53d8250ee3c087f775220fa28fa57a2cdc148
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sun Feb 24 17:11:25 2013 +0200
+
+    Small update.
+
+commit 6a8a20e01b817ed056200c2488ac38a36857cec8
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 23:54:10 2013 +0200
+
+    Added enemy targets and bullets.
+
+commit 48f0a1c1c1ab91ca5935deb9895c7b47b48d9caf
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 17:09:19 2013 +0200
+
+    Minor updates.
+
+commit a6d4cdfc2b065a88cae4de5026a583a2ca1d9c83
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 15:37:25 2013 +0200
+
+    Added precise collision detection.
+
+commit 6a64b94125007de4be6173ddaf54c73d67db5af5
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 13:54:01 2013 +0200
+
+    Added depth testing.
+
+commit 7167579b846628f60f47a58baabc204f61fe5a67
+Merge: 8a7fa53 ae70921
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 12:56:55 2013 +0200
+
+    Project up to date.
+
+commit 8a7fa53f03223a8e60fb1cb3ac5b77f491fa33a0
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 12:54:25 2013 +0200
+
+    Project up to date.
+
+commit ae7092160825cd51c64ac227b76051d589d5754c
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 12:48:24 2013 +0200
+
+    Up to date.
+
+commit b5f84f1907c3a389579b5892183fda58896cfe92
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 12:45:45 2013 +0200
+
+    Added project.
+
+commit 1243b94c0a00ee9e97ee919331946a6e5045bf08
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 12:42:59 2013 +0200
+
+    Added the project.
+
+commit eda1e7b1731732dfd7b77ec665feb73c95f35d18
+Merge: 5330088 adce9b5
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 12:40:03 2013 +0200
+
+    Merge branch 'master' of https://github.com/marcuiulian13/rpg
+
+commit 533008843f0553e9b54971608c02f6badeb4d05f
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 12:39:38 2013 +0200
+
+    Removed README file.
+
+commit adce9b5d0292250497c8997ab12f474369c9b6a0
+Author: marcuiulian13 <marcu.iulian13@gmail.com>
+Date:   Sat Feb 23 12:37:58 2013 +0200
+
+    Update README.md
+
+commit d9bb9c1c0b4ca6360ff3efa0ebb2518cb3ca93c6
+Merge: 86cbacf fac7161
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 12:34:19 2013 +0200
+
+    Merge branch 'master' of https://github.com/marcuiulian13/rpg
+
+commit 86cbacffb053c84e03a63f089000ebbd4ddc3913
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Sat Feb 23 12:13:37 2013 +0200
+
+    Added README file.
+
+commit fac7161c54f0603581d9dfc455aeb8df8a4f29ab
+Author: marcuiulian13 <marcu.iulian13@yahoo.com>
+Date:   Fri Feb 22 01:15:45 2013 -0800
+
+    Initial commit

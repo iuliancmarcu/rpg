@@ -9,21 +9,21 @@ import ro.enoor.rpg.entity.Enemy;
 import ro.enoor.rpg.entity.Entity;
 import ro.enoor.rpg.level.tile.ObjectTile;
 import ro.enoor.rpg.level.tile.Tile;
-import ro.enoor.rpg.world.GameWorld;
+import ro.enoor.rpg.world.World;
 import ro.enoor.rpg.world.WorldRenderer;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Level {
-	private GameWorld world;
+	private World world;
 	public int[][] map;
 	private int width, height;
 	private ArrayList<Entity> entities;
 	private ArrayList<Entity> onScreenEntities;
 
-	public Level(GameWorld world, int levelWidth, int levelHeight) {
-		this.world = world;
+	public Level(World gameWorld, int levelWidth, int levelHeight) {
+		world = gameWorld;
 		
 		if(levelWidth < 25) levelWidth = 25;
 		if(levelHeight < 20) levelHeight = 20;

@@ -3,21 +3,18 @@ package ro.enoor.rpg.world;
 import ro.enoor.rpg.entity.Player;
 import ro.enoor.rpg.level.tile.Tile;
 
-import box2dLight.RayHandler;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class WorldRenderer {
-	private GameWorld world;
+	private World world;
 	private Player player;
 	private SpriteBatch batch;
 	private static OrthographicCamera camera;
-	private RayHandler handler;
 
-	public WorldRenderer(GameWorld world) {
+	public WorldRenderer(World world) {
 		this.world = world;
 		
 		player = world.getPlayer();

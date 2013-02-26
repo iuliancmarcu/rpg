@@ -2,7 +2,6 @@ package ro.enoor.rpg.world;
 
 import java.util.Random;
 
-import ro.enoor.rpg.MainGame;
 import ro.enoor.rpg.entity.Player;
 import ro.enoor.rpg.level.Level;
 import ro.enoor.rpg.level.tile.Tile;
@@ -12,8 +11,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 
 public class World {
-	private long startTime;
-	private boolean shouldDisplay;
+	private World boxWorld;
 	private Level level;
 	private Player player;
 	private Random random;
@@ -32,23 +30,13 @@ public class World {
 		level.initLevel();
 	}
 	
-	@SuppressWarnings("unused")
 	public void update() {
-		if(MainGame.DEBUGGING) {
-			if(System.currentTimeMillis() > startTime + 5000) {
-				startTime = System.currentTimeMillis();
-				shouldDisplay = true;
-			} else shouldDisplay = false;
-		}
+		float delta = Gdx.graphics.getDeltaTime() / 0.016f;
 		
 		input();
 
-		player.update();
-		level.update();
-		
-		if(MainGame.DEBUGGING && shouldDisplay) {
-			System.out.println("Update time: " + (System.currentTimeMillis() - startTime));
-		}
+		player.update(delta);
+		level.update(delta);
 	}
 	
 	public void input() {
@@ -59,9 +47,12 @@ public class World {
 		else if(input.isKeyPressed(Keys.A)) player.move(1);
 		else if(input.isKeyPressed(Keys.D)) player.move(3);
 		
-		if(input.isKeyPressed(Keys.CONTROL_RIGHT)) player.shoot();
+		if(input.isKeyPressed(Keys.CONTROL_RIGHT)) player.attack();
+		if(input.isKeyPressed(Keys.SHIFT_RIGHT)) player.setSpeed(Player.R_SPEED);
+		else player.setSpeed(Player.N_SPEED);
 	}
 	
 	public Level getLevel() { return level; }
 	public Player getPlayer() { return player; }
+	public World getBoxWorld() { return boxWorld; }
 }
