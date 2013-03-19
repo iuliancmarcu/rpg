@@ -21,7 +21,9 @@ public class WorldRenderer {
 		
 		player = world.getPlayer();
 		batch = new SpriteBatch();
-		camera = new OrthographicCamera();
+		camera = new OrthographicCamera(800 >> 1, 600 >> 1);
+		camera.position.set(world.getPlayer().getPosition().x, world.getPlayer().getPosition().y, 0);
+		camera.update();
 	}
 		
 	private void updateCameraPosition() {
@@ -39,14 +41,15 @@ public class WorldRenderer {
 		
 		float dx = targetX - camera.position.x, dy = targetY - camera.position.y, dist = (float) Math.hypot(dx, dy);
 		Vector3 cameraVector = new Vector3((float) Math.cos(Math.atan2(dy, dx)), (float) Math.sin(Math.atan2(dy, dx)), 0);
-		cameraVector.mul(dist / 50f);
+		cameraVector.mul(Math.max(dist / 25f, 0.2f));
 		
 		camera.position.add(cameraVector);
+		//camera.position.set((float) Math.round(camera.position.x), (float) Math.round(camera.position.y), 0);
 		camera.update();
 	}
 
 	public void render() {
-		Gdx.gl.glClearColor(.5f, .5f, .5f, 1);
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		updateCameraPosition();
@@ -58,11 +61,6 @@ public class WorldRenderer {
 		batch.end();
 		
 		MainGame.fpslogger.log();
-	}
-
-	public void updateCameraSize(int width, int height) {
-		camera.setToOrtho(false, width / 2, height / 2);
-		camera.update();
 	}
 	
 	public static OrthographicCamera getCamera() { return camera; }

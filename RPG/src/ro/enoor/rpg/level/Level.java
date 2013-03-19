@@ -7,7 +7,7 @@ import java.util.Random;
 
 import ro.enoor.rpg.entity.Enemy;
 import ro.enoor.rpg.entity.Entity;
-import ro.enoor.rpg.level.tile.ObjectTile;
+import ro.enoor.rpg.level.tile.EntityTile;
 import ro.enoor.rpg.level.tile.Tile;
 import ro.enoor.rpg.world.World;
 import ro.enoor.rpg.world.WorldRenderer;
@@ -44,11 +44,11 @@ public class Level {
 		for(int y = height - 1; y >= 0; y--)
 			for(int x = 0; x < width; x++)
 				if(Tile.isObject(map[y][x]))
-					entities.add(new ObjectTile(this, x, y, Tile.getTileById(map[y][x])));
+					entities.add(new EntityTile(this, x, y, Tile.getTileById(map[y][x])));
 		
 		int x, y;
 		Random rand = new Random();
-		for(int i = 0; i < 50; i++) {
+		for(int i = 0; i < 5; i++) {
 			do {
 				x = rand.nextInt(width);
 				y = rand.nextInt(height);
@@ -87,7 +87,7 @@ public class Level {
 			ent.draw(batch);
 	}
 
-	public void renderTiles(SpriteBatch batch) {
+	public void renderTiles(SpriteBatch batch) {		
 		OrthographicCamera camera = WorldRenderer.getCamera();
 
 		int startX = (int) (Math.floor(camera.position.x - camera.viewportWidth / 2) / Tile.TILE_SIZE);
@@ -100,18 +100,10 @@ public class Level {
 		startY = (startY >= 0) ? startY : 0;
 		endY = (endY < height) ? endY : height - 1;
 		
-		for(int y = endY; y >= startY; y--)
+		for(int y = startY; y <= endY; y++)
 			for(int x = startX; x <= endX; x++)
-				if (!Tile.isObject(map[y][x])) {
+				if (!Tile.isObject(map[y][x]))
 					Tile.getTileById(map[y][x]).draw(batch, x, y);
-					//DRAW OBJECTS SHADOWS
-					if(x > 0 && y < height - 1) {
-						int dir = (Tile.isObject(map[y][x - 1]) ? 1 : 0) | 
-								(Tile.isObject(map[y + 1][x - 1]) ? 1 : 0) << 1 | 
-								(Tile.isObject(map[y + 1][x]) ? 1 : 0) << 2;
-						if(dir != 0) Tile.drawShadow(batch, x, y, dir);				
-					}
-				}
 	}
 
 	public int getWidth() { return width; }

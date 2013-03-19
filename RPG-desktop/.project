@@ -18,7 +18,7 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/RPG-android/assets</locationURI>
+			<location>/home/iulian/Others/Java/RPG/RPG-desktop/assets</location>
 		</link>
 	</linkedResources>
 </projectDescription>

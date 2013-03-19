@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class Tile {
 	public static final TextureAtlas ATLAS = new TextureAtlas("atlases/tiles.atlas");
-	private static final TextureAtlas SHADOWS = new TextureAtlas("atlases/shadows.atlas");
-
 	public static final int TILE_SIZE = 16;
 	
     public static final Tile[] TILES = new Tile[256];
@@ -17,7 +15,7 @@ public abstract class Tile {
     public static final Tile GRASS = new BasicTile(1, false, "grass");
     public static final Tile DIRT = new BasicTile(2, false, "dirt");
     public static final Tile SAND = new BasicTile(3, false, "sand");
-    public static final Tile WALL = new SolidTile(4, true, "wall");
+    public static final Tile WALL = new BasicTile(4, true, "wall");
     
     protected byte id;
     protected boolean solid;
@@ -33,10 +31,7 @@ public abstract class Tile {
         
         if(name == "void") texture = new TextureRegion(new Texture((int) TILE_SIZE, (int) TILE_SIZE, Format.RGBA8888));
         else texture = ATLAS.findRegion(name);
-    }
-    
-    public static void drawShadow(SpriteBatch batch, int x, int y, int dir) {
-    	batch.draw(SHADOWS.findRegion("" + dir), x * TILE_SIZE, y * TILE_SIZE);
+        //texture.getTexture().setFilter(TextureFilter.MipMapNearestNearest, TextureFilter.MipMapNearestNearest);
     }
 	
 	public void draw(SpriteBatch batch, float x, float y) {

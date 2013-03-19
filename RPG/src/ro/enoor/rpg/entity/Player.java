@@ -2,14 +2,12 @@ package ro.enoor.rpg.entity;
 
 import ro.enoor.rpg.level.Level;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Mob {
-	private static final TextureAtlas ATLAS = new TextureAtlas("atlases/player.atlas");
+	private static TextureAtlas ATLAS = new TextureAtlas("atlases/player.atlas");
 
-	public static final float N_SPEED = .5f, R_SPEED = 1f;
+	public static final float N_SPEED = 1f, R_SPEED = 2f;
 	public static final int HEALTH = 14;
 	public static final int ATT_SPEED = 200;
 	
@@ -24,7 +22,7 @@ public class Player extends Mob {
 	}
 
 	protected void updateHitBox() {
-		hitBox.set(position.x + 2, position.y + height / 8, width - 4, height / 8 + 2);		
+		hitBox.set(position.x + 1, position.y, width - 2, height / 4);	
 	}
 	
 	public void mobAttack() {
@@ -34,16 +32,10 @@ public class Player extends Mob {
 	public boolean isColliding() {
 		if(!super.isColliding()) {
 			for(Entity ent : level.getVisibleEntities())
-				if(!ent.equals(this) && (ent instanceof Mob) && hitBox.overlaps(ent.hitBox))
+				if(!ent.equals(this) && hitBox.overlaps(ent.hitBox) && !(ent instanceof Bullet))
 					return true;
 		}
 		return super.isColliding();
-	}
-	
-	public void draw(SpriteBatch batch) {
-		Vector2 shadowPosition = new Vector2(position.x, position.y - 10);
-		batch.draw(ATLAS.findRegion("shadow"), shadowPosition.x, shadowPosition.y);
-		super.draw(batch);
 	}
 	
 	public void setSpeed(float speed) { this.speed = speed; }

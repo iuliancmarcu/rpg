@@ -11,7 +11,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 
 public class World {
-	private World boxWorld;
 	private Level level;
 	private Player player;
 	private Random random;
@@ -46,11 +45,10 @@ public class World {
 		else if(input.isKeyPressed(Keys.D)) player.move(3);
 		
 		if(input.isKeyPressed(Keys.CONTROL_RIGHT)) player.attack();
-		if(input.isKeyPressed(Keys.SHIFT_RIGHT)) player.setSpeed(.001f);
+		if(input.isKeyPressed(Keys.SHIFT_RIGHT)) player.setSpeed(Player.R_SPEED);
 		else player.setSpeed(Player.N_SPEED);
 	}
 	
 	public Level getLevel() { return level; }
 	public Player getPlayer() { return player; }
-	public World getBoxWorld() { return boxWorld; }
 }

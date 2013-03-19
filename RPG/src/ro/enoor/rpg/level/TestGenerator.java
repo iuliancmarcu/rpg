@@ -13,7 +13,7 @@ public class TestGenerator {
 			for (int x = 0; x < width; x++) {
 				if(y == 0 || y == height - 1) map[y][x] = Tile.WALL.getId();
 				else if(x == 0 || x == width - 1) map[y][x] = Tile.WALL.getId();
-				else if(rand.nextBoolean()) map[y][x] = 1 + rand.nextInt(4);
+				else if(rand.nextBoolean() && rand.nextBoolean() && rand.nextBoolean()) map[y][x] = Tile.WALL.getId();
 				else map[y][x] = Tile.GRASS.getId();
 			}
 	}

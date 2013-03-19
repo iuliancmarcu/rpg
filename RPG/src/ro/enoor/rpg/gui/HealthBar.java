@@ -10,7 +10,7 @@ public class HealthBar extends GuiElement {
 	private int health, totalHealth;
 	
 	public HealthBar(MoveableEntity entity, int health) {
-		super(entity.getPosition().x, entity.getPosition().y + entity.getHeight(), "healthbar");
+		super(entity.getPosition().x, entity.getPosition().y + entity.getHeight() + .5f, "healthbar");
 		this.entity = entity;
 		this.health = totalHealth = health;
 		unit = new HPUnit(this);
@@ -18,7 +18,7 @@ public class HealthBar extends GuiElement {
 
 	public void update() {
 		position.x = entity.getPosition().x;
-		position.y = entity.getPosition().y + entity.getHeight();
+		position.y = entity.getPosition().y + entity.getHeight() + .5f;
 		unit.update();
 	}
 

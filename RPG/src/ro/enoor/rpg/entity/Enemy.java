@@ -5,7 +5,7 @@ import ro.enoor.rpg.level.Level;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Enemy extends Mob {
-	public static final TextureAtlas ATLAS = new TextureAtlas("atlases/enemy.atlas");
+	public static TextureAtlas ATLAS = new TextureAtlas("atlases/enemy.atlas");
 	
 	public static final float SPEED = 1f;
 	public static final int HEALTH = 28;
@@ -22,7 +22,7 @@ public class Enemy extends Mob {
 	}
 
 	protected void updateHitBox() {
-		hitBox.set(position.x + 2, position.y + height / 8, width - 4, height / 8);		
+		hitBox.set(position.x + 1, position.y, width - 2, height / 4);		
 	}
 
 	protected void mobAttack() {

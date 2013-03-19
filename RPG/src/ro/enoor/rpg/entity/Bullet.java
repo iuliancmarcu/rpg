@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bullet extends MoveableEntity {
-	private static final Texture TEXTURE = new Texture("images/bullet.png");
+	private static Texture TEXTURE = new Texture("images/bullet.png");
 	
 	public static final float SPEED = 3f;
 	public static final int DAMAGE = 4;
@@ -17,7 +17,7 @@ public class Bullet extends MoveableEntity {
 	private Entity owner;
 	
 	public Bullet(Level level, MoveableEntity owner) {
-		super(level, owner.position.x + owner.width / 2 - 4, owner.position.y + owner.height / 4 - 4, SPEED, "bullet");
+		super(level, owner.position.x + owner.width / 2 - 4, owner.position.y - 4 + owner.height / 4, SPEED, "bullet");
 		this.owner = owner;
 		facing = owner.getFacing();
 	}
@@ -39,16 +39,18 @@ public class Bullet extends MoveableEntity {
 		updateHitBox();
 		velocity.set(Vector2.Zero);
 		
-		for(Entity ent : level.getVisibleEntities())
-			if(!ent.equals(owner) && (ent instanceof Mob) && hitBox.overlaps(ent.hitBox)) {
+		for(Entity ent : level.getVisibleEntities()) 
+			if(!ent.equals(owner) && !ent.equals(this) && hitBox.overlaps(ent.getHitBox())) {
+				if(ent instanceof Mob) ((Mob) ent).hurt(DAMAGE);
 				setRemoved();
-				((Mob) ent).hurt(DAMAGE);
 			}
 		if(isColliding() || !isOnScreen()) setRemoved();
 	}
 	
 	public void draw(SpriteBatch batch) {
+		batch.setColor(1f, 0f, 0f, 1f);
 		float rotation = 360 - (facing * 90);
 		batch.draw(texture.getTexture(), position.x, position.y, width / 2, width / 2, width, width, 1, 1, rotation, 0, 0, width, width, false, false);
+		batch.setColor(1f, 1f, 1f, 1f);
 	}
 }

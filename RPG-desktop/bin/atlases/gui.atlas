@@ -13,14 +13,14 @@ healthbar
 manaunit
   rotate: false
   xy: 0, 0
-  size: 2, 2
-  orig: 2, 2
+  size: 1, 2
+  orig: 1, 2
   offset: 0, 0
   index: -1
 healthunit
   rotate: false
   xy: 16, 4
-  size: 2, 2
-  orig: 2, 2
+  size: 1, 2
+  orig: 1, 2
   offset: 0, 0
   index: -1

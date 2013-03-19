@@ -41,7 +41,9 @@ public abstract class Entity {
 	}
 	
 	public void draw(SpriteBatch batch) {
+		batch.setColor(1f, 0f, 0f, 1f);
 		batch.draw(texture, position.x, position.y);
+		batch.setColor(1f, 1f, 1f, 1f);
 	}
 	
 	public abstract void update(float delta);
